@@ -1,10 +1,14 @@
 package sdf
 
-import "fmt"
-import "time"
+import (
+	"testing"
+	"time"
+)
 
-func Example() {
-	t := time.Date(2020, 10, 12, 0, 0, 0, 0, time.UTC)
-	fmt.Println(Format(t))
-	// Output: P0A12
+func TestFormat(t *testing.T) {
+	ts := time.Date(2020, 10, 12, 0, 0, 0, 0, time.UTC)
+	got := Format(ts)
+	if got != "P0A12" {
+		t.Fatalf("want %q got %q", "P0A12", got)
+	}
 }
