@@ -8,8 +8,11 @@ export function roundToMonthStartUTC(date) {
 
 export function sdfOneBit9chars(now: number): string {
   // returns YMD + base34 of the rest sans 1 bit (9 chars total)
+  now = now || (+new Date());
   let crop = +roundToMonthStartUTC(new Date(now))
   let halfDelta = ((now - crop) / 2) | 0;
   let sdfYMD = (getSDF(now) + '').slice(0, 3).toLowerCase()
   return sdfYMD + halfDelta.toString(34).padStart(6, '0');
 }
+
+// todo decoder
