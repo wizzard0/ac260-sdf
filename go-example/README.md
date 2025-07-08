@@ -1,6 +1,7 @@
 # Example usage
 
-Simple program printing formatted date and parsed value. Import path uses GitHub URL.
+Small program prints formatted date and parsed timestamp.
+Module path is loaded from GitHub using Go modules.
 
 ```
 go run .
