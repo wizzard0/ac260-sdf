@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	sdf "github.com/wizzard0/ac260-sdf/go"
+	"github.com/wizzard0/ac260-sdf/go/sdf"
 )
 
 func main() {
