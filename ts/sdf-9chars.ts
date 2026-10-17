@@ -2,13 +2,14 @@
 
 import {getSDF} from "./sdf.ts";
 
-export function roundToMonthStartUTC(date) {
+export function roundToMonthStartUTC(date: Date) {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
 }
 
 export function sdfOneBit9chars(now: number): string {
   // returns YMD + base34 of the rest sans 1 bit (9 chars total)
-  now = now || (+new Date());
+  // the caller passes the clock: 0 is 1970, not "now"
+  if (typeof now !== 'number' || !Number.isFinite(now)) throw new TypeError('sdfOneBit9chars: now must be a finite ms timestamp');
   let crop = +roundToMonthStartUTC(new Date(now))
   let halfDelta = ((now - crop) / 2) | 0;
   let sdfYMD = (getSDF(now) + '').slice(0, 3).toLowerCase()
