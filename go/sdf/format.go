@@ -37,9 +37,9 @@ func formatYear(t time.Time) string {
 func formatDec(t time.Time) string {
 	y := t.Year()
 	d := y % 100 / 10
-	pre := 'X'
-	if y > 2000 {
-		pre = 'C'
+	pre := 'C'
+	if y >= 2100 {
+		pre = 'X'
 	}
 	return string(pre) + strconv.Itoa(d)
 }
@@ -47,9 +47,9 @@ func formatDec(t time.Time) string {
 func formatCen(t time.Time) string {
 	y := t.Year()
 	c := y % 1000 / 100
-	pre := 'Y'
-	if y > 2000 {
-		pre = 'B'
+	pre := 'B'
+	if y >= 2200 {
+		pre = 'Y'
 	}
 	return string(pre) + strconv.Itoa(c)
 }
