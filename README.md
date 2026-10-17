@@ -13,7 +13,7 @@ Provides a way to encode any date as a short string, keeps lexicographical order
 | P0A12   | Day       | October 12, 2020 |
 
 Also, usable for partially-readable still sortable ID generation.  
-The Y-M-D part is exposed directly, the rest is milliseconds with 2ms precision, so the ID fits in the 9 base34 characters total.
+The year-month code (e.g. `p03` for March 2020) is exposed directly; the rest counts 2ms ticks since the start of that UTC month, so the ID fits in 9 base34 characters total. There is no day in the prefix: the day is folded into the ticks.
 
 ## ID examples
 
