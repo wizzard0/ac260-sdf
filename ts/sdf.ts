@@ -40,9 +40,10 @@ let parseYear=(m1:any,log:any)=>{
 }
 
 let parseLN=(m2:any,log:any)=>{ // here log is always defined
-  let[_,str,n1]=m2;let L=parseL(str,log);let yr=ufy(L);let d1=+n1;let yfull=new Date(L);
+  let[_,str,n1]=m2;let L=parseL(str,log);
+  if(str==='A'||str==='Z'){return L}//a bit lax but ok; ±Infinity has no ISO string
+  let yr=ufy(L);let d1=+n1;let yfull=new Date(L);
   log("L:",L,"yr=",yr,"d1=",d1,"yfull=",yfull.toISOString());
-  if(str==='A'||str==='Z'){return L}//a bit lax but ok
   // B8,B9 conflicts with C,D etc
   if(str==='B'){return d1>7?NaN:yfull.setUTCFullYear(yr+d1*100)}
   // Y0,Y1 conflicts with Netc, X
@@ -88,13 +89,13 @@ export let formatYear=(ts:number)=>{
 export let formatDec=(ts:number)=>{
   let yr=ufy(ts); // note it's from 1000 to 3000, so... 2700>7,1700>7
   let dec=(yr%100/10|0)+''
-  return ((yr>2000)?'C':'X')+dec; // just X7 as 2170-2179, C2 as 1820-1829
+  return ((yr>=2100)?'X':'C')+dec; // just X7 as 2170-2179, C2 as 1820-1829
 }
 
 export let formatCen=(ts:number)=>{
   let yr=ufy(ts); // note it's from 1000 to 3000, so... 2700>7,1700>7
   let cen=(yr%1000/100|0)+''
-  return ((yr>2000)?'B':'Y')+cen; // just Y7 as 2700-2799, B2 as 1200-1299
+  return ((yr>=2200)?'Y':'B')+cen; // just Y7 as 2700-2799, B2 as 1200-1299
 }
 
 export let formatInf=(ts:number)=>(ts<0)?'A0':'Z9' // further precision undefined
